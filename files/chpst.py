@@ -14,6 +14,6 @@ if opts.group:
 
 if opts.user:
 	uid = pwd.getpwnam(opts.user).pw_uid
-	os.setresuid(uid, uid, uid)
+	os.setreuid(uid, uid)
 
 os.execvp(args[0], args)
