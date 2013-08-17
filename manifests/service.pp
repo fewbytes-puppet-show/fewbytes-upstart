@@ -19,7 +19,8 @@ define upstart::service(
 	file{"${upstart::params::svc_dir}/${service_name}.conf":
 		ensure => $enable ? { true => present, false => absent, default => present},
 		content => template($template),
-		mode => 644
+		mode => 644,
+		notify => Service[$service_name]
 	}
 	
 	case $::osfamily {
