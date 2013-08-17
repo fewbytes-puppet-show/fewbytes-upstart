@@ -1,0 +1,8 @@
+name    'fewbytes/upstart'
+version '0.1.0'
+source 'UNKNOWN'
+author 'fewbytes'
+license 'Apache License, Version 2.0'
+summary 'Convinience definition and utils for using Upstart from Puppet'
+description 'UNKNOWN'
+project_page 'UNKNOWN'
