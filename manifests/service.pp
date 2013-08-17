@@ -7,7 +7,7 @@ define upstart::service(
 	$chdir=undef,
 	$exec=undef,
 	$script=undef,
-	$type=foreground,
+	$expect=undef,
 	$start_on="runlevel [2345]",
 	$stop_on="runlevel [^2345]",
 	$template="upstart/init.conf.erb",
