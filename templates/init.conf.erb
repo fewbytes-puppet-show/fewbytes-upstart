@@ -16,9 +16,14 @@ setuid <%= @user %>
 <% chpst_args += "-g #{@group}" -%>
 <% end -%>
 
+<% @env.each do |k,v| -%>
+<%= "#{k}=#{v}" %>
+<% end -%>
+
 <% if @exec -%>
 exec <%= chpst_args ? "chpst.py #{chpst_args} -- #{@exec}" : @exec %>
 <% elsif @script %>
 script
 	<%= @script %>
 end script
+<% end %>

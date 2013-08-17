@@ -10,7 +10,8 @@ define upstart::service(
 	$type=foreground,
 	$start_on="runlevel [2345]",
 	$stop_on="runlevel [^2345]",
-	$template="upstart/init.conf.erb"
+	$template="upstart/init.conf.erb",
+	$env={}
 ) {
 	include upstart::params
 	include upstart::utils
