@@ -5,13 +5,16 @@ define upstart::service(
 	$user=undef,
 	$group=undef,
 	$chdir=undef,
+	$chroot=undef,
 	$exec=undef,
 	$script=undef,
 	$expect=undef,
 	$start_on="runlevel [2345]",
 	$stop_on="runlevel [^2345]",
 	$template="upstart/init.conf.erb",
-	$env={}
+	$env={},
+	$limits={},
+	$nice=undef
 ) {
 	include upstart::params
 	include upstart::utils

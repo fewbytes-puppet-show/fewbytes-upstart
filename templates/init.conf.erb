@@ -10,6 +10,9 @@ expect <%= @expect %>
 <% if @chdir -%>
 chdir <%= @chdir %>
 <% end -%>
+<% if @chroot -%>
+chroot <%= @chroot %>
+<% end -%>
 <% if @user and scope.lookupvar("upstart::params::setuid_supported") %>
 setuid <%= @user %>
 <% elsif @user %>
@@ -18,9 +21,16 @@ setuid <%= @user %>
 <% if @group and scope.lookupvar("upstart::params::setgid_supported") %>
 <% chpst_args += "-g #{@group}" -%>
 <% end -%>
+<% if @nice -%>
+nice <%= @nice %>
+<% end -%>
 
 <% @env.each do |k,v| -%>
 env <%= "#{k}=#{v}" %>
+<% end -%>
+
+<% @limits.each do |k,v| -%>
+limit <%= k %> <%= v %>
 <% end -%>
 
 <% if @exec -%>
