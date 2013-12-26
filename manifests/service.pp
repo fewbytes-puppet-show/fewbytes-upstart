@@ -33,7 +33,7 @@ define upstart::service(
 				hasrestart => true,
 				hasstatus => true,
 				start => "/sbin/initctl start ${service_name}",
-				restart => "/sbin/initctl restart ${service_name}",
+				restart => "/sbin/initctl stop ${service_name}; /sbin/initctl start ${service_name}",
 				stop => "/sbin/initctl stop ${service_name}",
 				status => "/sbin/initctl status ${service_name} | grep running",
 				require => [File["${upstart::params::svc_dir}/${service_name}.conf"],
