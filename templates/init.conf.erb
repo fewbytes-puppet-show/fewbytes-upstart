@@ -16,10 +16,12 @@ chroot <%= @chroot %>
 <% if @user and scope.lookupvar("upstart::params::setuid_supported") %>
 setuid <%= @user %>
 <% elsif @user %>
-<% chpst_args += "-u #{@user}" -%>
+<% chpst_args += " -u #{@user}" -%>
 <% end -%>
 <% if @group and scope.lookupvar("upstart::params::setgid_supported") %>
-<% chpst_args += "-g #{@group}" -%>
+setgid  <%= @group %>
+<% elsif @group -%>
+<% chpst_args += " -g #{@group}" -%>
 <% end -%>
 <% if @nice -%>
 nice <%= @nice %>
