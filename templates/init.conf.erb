@@ -6,7 +6,7 @@ stop on <%= @stop_on %>
 <% if @expect -%>
 expect <%= @expect %>
 <% end -%>
-<% chpst_args = "" -%>
+<% chpst_args = nil -%>
 <% if @chdir -%>
 chdir <%= @chdir %>
 <% end -%>
@@ -28,7 +28,7 @@ nice <%= @nice %>
 <% end -%>
 
 <% @env.each do |k,v| -%>
-env <%= "#{k}=#{v}" %>
+env <%= "#{k}=\"#{v.gsub('\"', '\\\"')}\"" %>
 <% end -%>
 
 <% @limits.each do |k,v| -%>
