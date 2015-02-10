@@ -14,10 +14,18 @@ define upstart::service(
 	$template="upstart/init.conf.erb",
 	$env={},
 	$limits={},
-	$nice=undef
+	$nice=undef,
+        $respawn=false,
+        $respawn_limit=undef,
+        $hooks={}
 ) {
 	include upstart::params
 	include upstart::utils
+
+        if $respawn_limit!=undef {
+          validate_string($respawn_limit)
+        }
+        validate_bool($respawn)
 
 	file{"${upstart::params::svc_dir}/${service_name}.conf":
 		ensure => $enable ? { true => present, false => absent, default => present},
@@ -25,7 +33,7 @@ define upstart::service(
 		mode => 644,
 		notify => Service[$service_name]
 	}
-	
+
 	case $::osfamily {
 		"RedHat" : {
 			service { $service_name:
@@ -37,7 +45,7 @@ define upstart::service(
 				stop => "/sbin/initctl stop ${service_name}",
 				status => "/sbin/initctl status ${service_name} | grep running",
 				require => [File["${upstart::params::svc_dir}/${service_name}.conf"],
-					File["/usr/local/sbin/chpst.py"]]	
+					File["/usr/local/sbin/chpst.py"]]
 			}
 		}
 		"Debian" : {
