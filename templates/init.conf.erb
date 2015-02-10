@@ -3,27 +3,27 @@
 start on <%= start_on %>
 stop on <%= stop_on %>
 
-<% if expect -%>
+<% if @expect -%>
 expect <%= expect %>
 <% end -%>
 <% chpst_args = nil -%>
-<% if chdir -%>
+<% if @chdir -%>
 chdir <%= chdir %>
 <% end -%>
-<% if chroot -%>
+<% if @chroot -%>
 chroot <%= chroot %>
 <% end -%>
-<% if user and scope.lookupvar("upstart::params::setuid_supported") %>
-setuid <%= user %>
-<% elsif user %>
-<% chpst_args += " -u #{user}" -%>
+<% if @user and scope.lookupvar("upstart::params::setuid_supported") %>
+setuid <%= @user %>
+<% elsif @user %>
+<% chpst_args += " -u #{@user}" -%>
 <% end -%>
-<% if group and scope.lookupvar("upstart::params::setgid_supported") %>
-setgid  <%= group %>
-<% elsif group -%>
-<% chpst_args += " -g #{group}" -%>
+<% if @group and scope.lookupvar("upstart::params::setgid_supported") %>
+setgid  <%= @group %>
+<% elsif @group -%>
+<% chpst_args += " -g #{@group}" -%>
 <% end -%>
-<% if nice -%>
+<% if @nice -%>
 nice <%= nice %>
 <% end -%>
 
@@ -35,8 +35,8 @@ env <%= "#{k}=\"#{v.gsub('\"', '\\\"')}\"" %>
 limit <%= k %> <%= v %> <%= v %>
 <% end -%>
 
-<% if respawn -%>respawn<% end -%>
-<% if respawn_limit -%>respawn limit <%= respawn_limit %><% end -%>
+<% if @respawn -%>respawn<% end -%>
+<% if @respawn_limit -%>respawn limit <%= respawn_limit %><% end -%>
 
 <% hooks.each do |hook, opts| -%>
 <% if opts[:exec] -%>
