@@ -6,6 +6,7 @@ define upstart::service(
   $user=undef,
   $group=undef,
   $chdir=undef,
+  $timeout=undef,
   $chroot=undef,
   $exec=undef,
   $script=undef,
