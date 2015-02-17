@@ -37,7 +37,7 @@ define upstart::service(
 
   file{"${upstart::params::svc_dir}.d/${service_name}":
     ensure => link,
-    target => "${upstart::params::svc_dir}/${service_name}.conf"
+    target => '/lib/init/upstart-job'
   }
 
   case $::osfamily {
