@@ -13,6 +13,9 @@ chdir <%= @chdir %>
 <% if @chroot -%>
 chroot <%= @chroot %>
 <% end -%>
+<% if @timeout-%>
+kill timeout <%=@timeout%>
+<% end -%>
 <% if @user and scope.lookupvar("upstart::params::setuid_supported") %>
 setuid <%= @user %>
 <% elsif @user %>
