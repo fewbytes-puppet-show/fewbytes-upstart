@@ -38,7 +38,7 @@ env <%= "#{k}=\"#{v.gsub('\"', '\\\"')}\"" %>
 limit <%= k %> <%= v %> <%= v %>
 <% end -%>
 
-<% if @respawn -%>respawn<% end -%>
+<% if @respawn -%>respawn<% end %>
 <% if @respawn_limit -%>respawn limit <%= @respawn_limit %><% end -%>
 
 <% @hooks.each do |hook, opts| -%>
